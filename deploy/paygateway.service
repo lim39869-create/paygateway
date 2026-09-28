@@ -1,0 +1,44 @@
+# PayGateway systemd 守护单元（RESILIENCE.md P0-3）
+#
+# 安装步骤：
+#   sudo cp deploy/paygateway.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now paygateway
+#
+# 前提：
+#   1. 已编译二进制：go build -o gateway ./cmd/gateway/
+#   2. .env 位于 WorkingDirectory 下（服务自动加载）
+#   3. 建议先手动跑一遍 go run ./cmd/gateway 确认启动正常
+#   4. 若部署路径与下方 WorkingDirectory 不同，请同步替换 4 处路径
+#      （WorkingDirectory / ExecStart / ReadWritePaths 中各 1 处）
+#
+# 常用命令：
+#   systemctl status paygateway     # 查看状态
+#   journalctl -u paygateway -f     # 实时日志
+#   systemctl restart paygateway    # 重启（CF 隧道域名每次重启会变，详见 README 升级章节）
+[Unit]
+Description=PayGateway 支付网关（易支付协议 + 个人免签）
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 工作目录 = 项目根目录（.env / data/ 都在这里）
+WorkingDirectory=/opt/paygateway
+# 编译产物路径（请先执行 go build -o gateway ./cmd/gateway/）
+ExecStart=/opt/paygateway/gateway
+Restart=always
+RestartSec=3
+# 优雅停止：给 10s 让回调 worker 收尾
+TimeoutStopSec=10
+KillSignal=SIGTERM
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/paygateway/data
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target

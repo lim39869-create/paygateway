@@ -1,0 +1,46 @@
+# ---- 环境与密钥 ----
+.env
+*.pem
+*.key
+
+# ---- 运行时数据 / 数据库 ----
+data/
+backup/
+paygateway.db
+personal.db
+accounts.db
+*.db-shm
+*.db-wal
+logs/
+.gateway.pid
+*.pid
+
+# ---- 构建产物 ----
+/gateway
+internal/tunnel/cloudflared
+*.test
+*.out
+vendor/
+__pycache__/
+*.pyc
+
+# ---- Removed Android listener artifacts ----
+listener-app/
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# ---- Web 前端 ----
+web/admin/node_modules/
+web/admin/dist/
+web/admin/.vite/
+
+# ---- 系统 / IDE ----
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo

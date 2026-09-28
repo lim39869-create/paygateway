@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">PayGateway</title>
+  <desc id="desc">A routed payment gateway with a verifiable ledger spine.</desc>
+  <rect width="96" height="96" rx="22" fill="#FAFAFA"/>
+  <path d="M24 27h18c8 0 14 6 14 14s-6 14-14 14H24" fill="none" stroke="#5B5BD6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 69h18c8 0 14-6 14-14" fill="none" stroke="#5B5BD6" stroke-width="8" stroke-linecap="round"/>
+  <path d="M56 27h8c8 0 14 6 14 14s-6 14-14 14H56" fill="none" stroke="#5B5BD6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56 55h8c8 0 14 6 14 14" fill="none" stroke="#168653" stroke-width="8" stroke-linecap="round"/>
+  <path d="M24 41h42M24 55h42" fill="none" stroke="#09090B" stroke-width="3" stroke-linecap="round" opacity=".78"/>
+  <path d="M66 41v14" fill="none" stroke="#168653" stroke-width="3" stroke-linecap="round"/>
+</svg>

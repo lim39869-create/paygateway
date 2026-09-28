@@ -1,0 +1,30 @@
+# PayGateway 容器化部署（WiFi adb 网络桥接版）
+#
+# 使用前准备：
+# 2. .env 含敏感配置（ACCOUNT_MASTER_KEY / JWT_SECRET / ORDER_DB 等），只读挂载。
+# 3. 首次启动：docker compose -f deploy/docker-compose.yml up -d --build
+#
+# USB 直连手机走另一条路：宿主机跑 adb server，取消 network_mode 注释此行按需切换，
+#   environment:
+#     - ADB_SERVER_SOCKET=tcp:172.17.0.1:5037   # docker0 宿主地址
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: paygateway
+    network_mode: host
+    user: "1000:1000"
+    env_file: ../.env
+    environment:
+      - HOME=/app/data       # pgw 用户的 HOME 默认 / 不可写，cloudflared 缓存目录需可写路径
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

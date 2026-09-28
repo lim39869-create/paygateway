@@ -1,0 +1,5 @@
+# Copy this file to current_callback.txt for local development only.
+# Do not commit production callback URLs.
+alipay: https://example.com/alipay/notify
+wechat: https://example.com/wechat/notify
+tunnel: https://example.com
