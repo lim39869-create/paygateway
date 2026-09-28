@@ -17,6 +17,17 @@
 
 > 详细设计见 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)（架构）、[`docs/MIANQIAN.md`](docs/MIANQIAN.md)（设备自动化概览）、[`docs/RESILIENCE.md`](docs/RESILIENCE.md)（弹性/对账）和 [`docs/PLAN-DYNAMIC-CLOSE-ALLOC.md`](docs/PLAN-DYNAMIC-CLOSE-ALLOC.md)（动态调度）。
 
+## 界面预览
+
+| | |
+|---|---|
+| ![登录页](docs/screenshots/login.png) | ![仪表盘](docs/screenshots/dashboard.png) |
+| **登录页**（首次启动自动进入管理员注册） | **仪表盘**（订单/交易额/成功率/回调队列） |
+| ![支付通道](docs/screenshots/channels.png) | ![订单管理](docs/screenshots/orders.png) |
+| **支付通道**（多上游、按 pid 路由验签） | **订单管理**（状态、补账、动态关单） |
+| ![审计账本](docs/screenshots/ledger.png) | ![系统设置](docs/screenshots/settings.png) |
+| **审计账本**（哈希链 + ECDSA 签名） | **系统设置**（运行时配置，密钥不入库） |
+
 ## 项目定位
 
 `paygateway` 不是一个只展示接口调用的 Demo，而是一个经过真实业务验证的支付与账务基础设施参考实现。项目重点不在于堆叠支付渠道数量，而在于把以下问题放进同一套可审查的工程模型中：
