@@ -4,6 +4,13 @@
 
 <p align="center">可扩展、可验证、面向授权业务集成的 Go 支付网关</p>
 
+<p align="center">
+  <a href="https://github.com/lim39869-create/paygateway/actions/workflows/ci.yml"><img src="https://github.com/lim39869-create/paygateway/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <img src="https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go" alt="Go 1.25+" />
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT License" />
+  <a href="https://goreportcard.com/report/github.com/lim39869-create/paygateway"><img src="https://goreportcard.com/badge/github.com/lim39869-create/paygateway" alt="Go Report Card" /></a>
+</p>
+
 # PayGateway 支付网关
 
 一个面向学习和授权业务集成的 Go 支付网关参考实现，兼容易支付（epay）协议，支持插件化商家通道、订单编排、可验证账本、异常对账和弹性调度。仓库同时保留设备自动化相关的通用工程实现，便于研究设备访问、事件处理和故障恢复。
@@ -82,6 +89,19 @@ FlashXAPI 的生产使用关系会在项目发布、博客文章和技术实践�
 ---
 
 ## 🚀 快速开始
+
+### 0. 两分钟最小体验（本地跑通，不接真实支付）
+
+```bash
+git clone https://github.com/lim39869-create/paygateway.git && cd paygateway
+cp .env.example .env
+# 生成必备主密钥并覆盖示例值
+sed -i "s/^ACCOUNT_MASTER_KEY=.*/ACCOUNT_MASTER_KEY=$(openssl rand -hex 32)/" .env
+go build -o gateway ./cmd/gateway/ && ./gateway
+# 打开 http://127.0.0.1:8081 → 首次访问自动进入管理员注册页
+```
+
+只启动了网关和后台，订单/账本/后台全部可用；真实收款需要另行配置支付通道密钥（见下文第 4 步起）。
 
 ### 1. 编译
 
